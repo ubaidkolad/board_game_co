@@ -33,13 +33,27 @@ export default function MainGame() {
 		}
 	];
 
+	const [selectedCards, setSelectedCards] = useState([])
+
 	const [activeCards, setActiveCards] = useState(Cards);
+
+	function selectCard(id){
+		if (selectedCards.length < 2){
+			setSelectedCards([...selectedCards, id]);
+			
+		}
+		else{
+			setSelectedCards([id,selectedCards[0]])
+		}
+		
+	}
 
 	const roomDetails = {
 		name: "office",
 		description:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 	};
+	console.log(selectedCards);
 
 	return (
 		<>
@@ -50,7 +64,7 @@ export default function MainGame() {
 				{activeCards.map(c => (
 					<>
 						<Col md={3}>
-							<ObjectCard card={c}></ObjectCard>
+							<ObjectCard card={c} selectCard={selectCard}></ObjectCard>
 						</Col>
 					</>
 				))}
