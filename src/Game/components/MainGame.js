@@ -38,12 +38,16 @@ export default function MainGame() {
 	const [activeCards, setActiveCards] = useState(Cards);
 
 	function selectCard(id){
-		if (selectedCards.length < 2){
-			setSelectedCards([...selectedCards, id]);
-			
+		if (selectedCards.indexOf(id) === -1){
+
+			if (selectedCards.length < 2) {
+				setSelectedCards([...selectedCards, id]);
+			} else {
+				setSelectedCards([id, selectedCards[0]]);
+			}
 		}
 		else{
-			setSelectedCards([id,selectedCards[0]])
+			alert('already selected')
 		}
 		
 	}
