@@ -9,7 +9,7 @@ export default class Timer extends React.Component {
 	componentDidMount() {
 		this.startTimer();
 	}
-	0;
+
 	startTimer() {
 		setInterval(() => {
 			this.setState({
