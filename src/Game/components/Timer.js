@@ -22,9 +22,7 @@ export default class Timer extends React.Component {
 		return Math.floor(this.state.secondElapsed / 60);
 	}
 	getSeconds() {
-		return ("0" + (this.state.secondElapsed % 60) + this.props.penalty).slice(
-			-2
-		);
+		return ("0" + (this.state.secondElapsed % 60)).slice(-2);
 	}
 
 	render() {
