@@ -73,7 +73,10 @@ export default function SubmissionModal(props) {
 					</Button>
 					<Button
 						variant="primary"
-						onClick={() => verifyCards(firstNumber, secondNumber, finalNumber)}
+						onClick={() => {
+							verifyCards(firstNumber, secondNumber, finalNumber)
+							setShow(false)
+						}}
 					>
 						check
 					</Button>
