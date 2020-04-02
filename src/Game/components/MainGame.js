@@ -44,16 +44,7 @@ export default function MainGame() {
   }
 
   function discard(cardNumber) {
-    console.log(cardNumber);
-    console.log(activeCards);
-    for (let i = 0; i < activeCards.length; i++) {
-      if (activeCards[i].number === cardNumber) {
-        activeCards.splice(i, 1);
-      }
-    }
-    const removed = [];
-    Array.prototype.push.apply(removed, activeCards);
-    setActiveCards(removed);
+    setActiveCards(activeCards.filter(c => c.number !== cardNumber));
   }
   return (
     <>
