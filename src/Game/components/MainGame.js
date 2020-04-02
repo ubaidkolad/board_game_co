@@ -20,25 +20,27 @@ export default function MainGame() {
   const [penalty, setPenalty] = useState(false);
   const [roundAnswers, setroundAnswers] = useState(LEVELS);
 
-  function verifyCards(number, finalNumber) {
-    if (finalNumber !== undefined) {
-      if (FINAL_ASNWER === finalNumber.toString()) {
-        alert("You WIN");
-      } else {
-        alert("You loose");
-      }
+  function verifyFinal(code) {
+    if (code.toString() === FINAL_ASNWER) {
+      alert("YOU WIN");
     } else {
-      if (number.toString() === roundAnswers[0].key) {
-        setActiveCards([
-          ...activeCards,
-          ...roundAnswers[0].reveled_cards.map(i => ALL_CARDS[i])
-        ]);
-        roundAnswers.splice(0, 1);
-        setroundAnswers(roundAnswers);
-      } else {
-        setPenalty(true);
-      }
+      setPenalty(true);
+      alert("Wrong Answer");
     }
+  }
+
+  function verifyCards(number) {
+    if (number.toString() === roundAnswers[0].key) {
+      setActiveCards([
+        ...activeCards,
+        ...roundAnswers[0].reveled_cards.map(i => ALL_CARDS[i])
+      ]);
+      roundAnswers.splice(0, 1);
+      setroundAnswers(roundAnswers);
+    } else {
+      setPenalty(true);
+    }
+    // }
   }
 
   function discard(cardNumber) {
@@ -56,23 +58,17 @@ export default function MainGame() {
   return (
     <>
       <Timer penalty={penalty} setPenalty={setPenalty}></Timer>
-      <RoomCard details={roomDetails}></RoomCard>
-
-      <Row>
+      <RoomCard details={roomDetails} verifyFinal={verifyFinal}></RoomCard>
+      <SubmissionModal verifyCards={verifyCards}></SubmissionModal>
+      <Row style={{ paddingTop: "1rem" }}>
         {activeCards.map(c => (
-          <Col md={3} style={{ paddingBottom: "1rem" }}>
+          <Col md={3} key={c.number} style={{ paddingBottom: "1rem" }}>
             <ObjectCard discard={discard} card={c}></ObjectCard>
           </Col>
         ))}
       </Row>
 
       <br />
-
-      <Row>
-        <Col md={6}>
-          <SubmissionModal verifyCards={verifyCards}></SubmissionModal>
-        </Col>
-      </Row>
     </>
   );
 }
