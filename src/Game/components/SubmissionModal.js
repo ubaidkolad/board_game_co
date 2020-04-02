@@ -5,20 +5,20 @@ export default function SubmissionModal(props) {
 	const [show, setShow] = useState(false);
 	const verifyCards = props.verifyCards;
 
-	const [firstNumber, setFirstNumber] = useState();
-	const [secondNumber, setSecondNumber] = useState();
+	const [number, setNumber] = useState();
+	//const [secondNumber, setSecondNumber] = useState();
 	const [finalNumber, setFinalNumber] = useState();
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
 	function onFirstNumberChange(e) {
-		setFirstNumber(parseInt(e.target.value));
+		setNumber(parseInt(e.target.value));
 	}
 
-	function onSecondNumberChange(e) {
-		setSecondNumber(parseInt(e.target.value));
-	}
+	// function onSecondNumberChange(e) {
+	// 	setSecondNumber(parseInt(e.target.value));
+	// }
 
 	function onFinalNumberChange(e) {
 		setFinalNumber(parseInt(e.target.value));
@@ -46,16 +46,16 @@ export default function SubmissionModal(props) {
 						style={{ width: "20rem" }}
 						id="answer"
 						type="number"
-						placeholder="Enter first number to check"
+						placeholder="Enter answer to check"
 					/>
 					<br />
-					<input
+					{/* <input
 						onChange={onSecondNumberChange}
 						style={{ width: "20rem" }}
 						id="answer"
 						type="number"
 						placeholder="Enter second number to check"
-					/>
+					/> */}
 					<h1>OR</h1>
 					<br />
 					<input
@@ -74,8 +74,8 @@ export default function SubmissionModal(props) {
 					<Button
 						variant="primary"
 						onClick={() => {
-							verifyCards(firstNumber, secondNumber, finalNumber)
-							setShow(false)
+							verifyCards(number, finalNumber);
+							setShow(false);
 						}}
 					>
 						check

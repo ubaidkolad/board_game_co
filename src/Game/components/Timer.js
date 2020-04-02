@@ -4,17 +4,26 @@ export default class Timer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { secondElapsed: 0 };
+		this.state = { secondElapsed: 0, penalty: this.props.penalty };
+		//	console.log(this.props.penalty);
 	}
-	componentDidMount() {
+
+	async componentDidMount() {
 		this.startTimer();
 	}
 
-	startTimer() {
+	async startTimer() {
 		setInterval(() => {
-			this.setState({
-				secondElapsed: this.state.secondElapsed + 1
-			});
+			console.log(this.state.penalty);
+			if (this.state.penalty === true) {
+				this.setState({
+					secondElapsed: this.state.secondElapsed + 10
+				});
+			} else {
+				this.setState({
+					secondElapsed: this.state.secondElapsed + 1
+				});
+			}
 		}, 1000);
 	}
 
@@ -29,6 +38,7 @@ export default class Timer extends React.Component {
 		return (
 			<div>
 				<h2>
+					<h1>{this.state.penalty.toString()}</h1>
 					{this.getMinutes()}:{this.getSeconds()}
 				</h2>
 			</div>
