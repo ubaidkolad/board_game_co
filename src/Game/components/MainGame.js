@@ -73,22 +73,21 @@ export default function MainGame() {
 		imgURL: Office
 	};
 
-	let roundOneAnswer = {
+	let ra = [{
 		name: "Cabinet Unlocked",
 		number: 36,
 		text: " The cabinet is open. Look closely to two interesting elements.",
 		imgURL: cabinetUnlocked
-	};
-	let roundTwoAnswer = {
+	},
+	{
 		name: "Correct",
 		number: 52,
 		text: "Round 2 correct"
-	};
-	let roundThreeAnswer = {
+	},{
 		name: "Correct",
 		number: 71,
 		text: "Round 3 correct"
-	};
+	}]
 
 	let finalAnswer = {
 		name: "Computer Unlocks",
@@ -98,6 +97,7 @@ export default function MainGame() {
 
 	const [activeCards, setActiveCards] = useState(Cards);
 	const [penalty, setPenalty] = useState(false);
+	const [roundAnswers,setroundAnswers] = useState(ra)
 
 	function verifyCards(number, finalNumber) {
 		if (finalNumber !== undefined) {
@@ -107,12 +107,11 @@ export default function MainGame() {
 				alert("You loose");
 			}
 		} else {
-			if (number === roundOneAnswer.number) {
+			if (number === roundAnswers[0].number) {
 				console.log("Correct!");
-				const n = [];
-				activeCards.push(roundOneAnswer);
-				Array.prototype.push.apply(n, activeCards);
-				setActiveCards(n);
+				setActiveCards([...activeCards,roundAnswers[0]]);
+				roundAnswers.splice(0,1)
+				setroundAnswers(roundAnswers)
 			}
 		}
 	}
