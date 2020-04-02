@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../../img/timer.png";
+
 export default class Timer extends React.Component {
 	constructor(props) {
 		super(props);
@@ -40,7 +40,11 @@ export default class Timer extends React.Component {
 		return (
 			<div>
 				<h2 style={{ paddingTop: "5rem", color: "#eb2d2d" }}>
-					<img src={img} height="50px" style={{ margin: 3 }} />
+					<img
+						src={`${window.location.origin}/assets/images/timer.png`}
+						height="50px"
+						style={{ margin: 3 }}
+					/>
 					<span>
 						{this.getMinutes()}:{this.getSeconds()}
 					</span>
