@@ -37,8 +37,8 @@ export default class Timer extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2 style={{ paddingTop: "5rem", color: "#eb2d2d" }}>
+      <span>
+        <h2 style={{ color: "#eb2d2d" }}>
           <img
             src={`${window.location.origin}/assets/images/timer.png`}
             height="50px"
@@ -49,7 +49,7 @@ export default class Timer extends React.Component {
             {this.getMinutes()}:{this.getSeconds()}
           </span>
         </h2>
-      </div>
+      </span>
     );
   }
 }

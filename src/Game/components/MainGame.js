@@ -3,7 +3,7 @@ import ObjectCard from "./ObjectCard/ObjectCard";
 import Timer from "./Timer";
 import RoomCard from "./RoomCard/RoomCard";
 import SubmissionModal from "./SubmissionModal";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import {
   ALL_CARDS,
   FINAL_ASNWER,
@@ -50,7 +50,19 @@ export default function MainGame() {
 
   return (
     <>
-      <Timer penalty={penalty} setPenalty={setPenalty}></Timer>
+      <Row style={{ paddingTop: "5rem" }}>
+        <Col md={2}>
+          <Timer penalty={penalty} setPenalty={setPenalty}></Timer>
+        </Col>
+        <Col>
+          <h3>Using hints will result in 5 min penalty</h3>
+        </Col>
+        <Col md={3}>
+          <Button onClick={() => alert(roundAnswers[0].hint)} block>
+            Hint
+          </Button>
+        </Col>
+      </Row>
       <RoomCard
         completed={completed}
         details={ROOM_DETAILS}

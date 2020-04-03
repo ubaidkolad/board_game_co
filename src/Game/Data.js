@@ -88,22 +88,30 @@ export const LEVELS = [
   {
     key: "36",
     reveled_cards: [36, 2],
-    discarded_cards: [22, 14]
+    discarded_cards: [22, 14],
+    hint:
+      "Use the key to open the cabinet. Add their numbers for them to interact with each other and enter the total in the 'Enter Number'"
   },
   {
     key: "1348",
     reveled_cards: [15],
-    discarded_cards: [2, 7]
+    discarded_cards: [2, 7],
+    hint:
+      "The blocks(07) will help to get the code for the tool box.On the box there are 4 triangles small to big.Imagine to arrange the blocks to form a pyramid. If you observe carefully, you can identify 4 triangles of different size. Cunt the total dots each triangle has. From the smallest to the largest triangle the number of dots"
   },
   {
     key: "24",
     reveled_cards: [43],
-    discarded_cards: [15, 67, 42, 36]
+    discarded_cards: [15, 67, 42, 36],
+    hint:
+      "You need to connect the wire to he right spots on the electric gridBlack numbers are the numbers on the grid. To calculate the single red digit number, one needs to add few black numbers. The pattern on cabinet indicates which numbers to add to get the single red digit number. Then add that red single digit number to the number on the wire"
   },
   {
     key: "2011",
     reveled_cards: [48],
-    discarded_cards: [16, 43]
+    discarded_cards: [16, 43],
+    hint:
+      "The daughter’s birth year is the password. The photo was taken in 2017 on her 7th birthday as it has seven candles. Enter her birth year in the “Enter Number"
   }
 ];
 
