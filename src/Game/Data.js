@@ -50,7 +50,7 @@ export const ALL_CARDS = {
   },
   36: {
     name: "Opened Cabinet",
-    number: 15,
+    number: 36,
     text:
       "The cabinet is open Look closely there are TWO interesting elements.",
     imgURL: "opened_cabinet.jpg"
@@ -77,7 +77,7 @@ export const ALL_CARDS = {
   },
   48: {
     name: "Unlocked Computer",
-    number: 15,
+    number: 48,
     text:
       "Well Done! The screen is on. This should help you get out. Enter the correct 4 digit code in the key pad to unlock the door and escape",
     imgURL: "computer_on.jpg"
@@ -87,22 +87,33 @@ export const ALL_CARDS = {
 export const LEVELS = [
   {
     key: "36",
-    reveled_cards: [36, 2]
+    reveled_cards: [36, 2],
+    discarded_cards: [22, 14]
   },
   {
     key: "1348",
-    reveled_cards: [15]
+    reveled_cards: [15],
+    discarded_cards: [2, 7]
   },
   {
     key: "24",
-    reveled_cards: [43]
+    reveled_cards: [43],
+    discarded_cards: [15, 67, 42, 36]
   },
   {
     key: "2011",
-    reveled_cards: [48]
+    reveled_cards: [48],
+    discarded_cards: [16, 43]
   }
 ];
 
 export const START_CARDS = [22, 14, 67, 21, 42, 7, 16];
 
 export const FINAL_ASNWER = "2946";
+
+export const ROOM_DETAILS = {
+  name: "Office",
+  description:
+    "In this adventure, you are a top ranked detective. You are extremely close to solving a high-class murder case. A tip leads you to the office space of a suspect. The clue that you want to gather might be the last missing puzzle piece to connect the dots. Without any prior preparation you rush to the suspect’s office. Its late in the night, so you have managed to sneak in without being noticed by the cameras and security guards. You enter the office room AND slam, the door shut on its own. You try to open it again but it won’t open. Seem like you have fallen into a trap. You have limited time to escape the room. GOOD LUCK. ",
+  imgURL: "office.jpg"
+};

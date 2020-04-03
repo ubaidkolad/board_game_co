@@ -12,9 +12,7 @@ export default function Navbar() {
           fontFamily: "'Merienda One', cursive"
         }}
       >
-        <span class="navbar-brand" href="#">
-          Board Game
-        </span>
+        <span className="navbar-brand">Board Game</span>
       </nav>
     </div>
   );

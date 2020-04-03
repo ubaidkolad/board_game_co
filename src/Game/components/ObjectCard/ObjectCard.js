@@ -1,11 +1,10 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "./ObjectCard.css";
 import { Row, Col } from "react-bootstrap";
 
 export default function ObjectCard(props) {
   const details = props.card;
-  const discard = props.discard;
 
   return (
     <Card
@@ -14,10 +13,9 @@ export default function ObjectCard(props) {
         backgroundColor: "#A9E4EA",
         textAlign: "left"
       }}
-      //	onClick={() => selectCard(details.number)}
     >
       <Card.Img
-        class="img-fluid"
+        className="img-fluid"
         variant="top"
         src={`${window.location.origin}/assets/images/${details.imgURL}`}
       />
@@ -53,11 +51,6 @@ export default function ObjectCard(props) {
         </Row>
         <br />
       </Card.Body>
-      <Card.Footer style={{ backgroundColor: "#242323", color: "#A9E4EA	" }}>
-        <Button onClick={() => discard(details.number)} variant="danger">
-          Discard
-        </Button>
-      </Card.Footer>
     </Card>
   );
 }

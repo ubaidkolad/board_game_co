@@ -32,18 +32,20 @@ export default function RoomCard(props) {
           <p style={{ fontFamily: "'Comfortaa', cursive" }}>
             {details.description}
           </p>
-          <NumPad.Number
-            placeholder="Enter code to unlock door"
-            negative={false}
-            decimal={false}
-            onChange={value => {
-              verifyFinal(value.toString());
-            }}
-          >
-            <Button variant="dark" size="md" block>
-              Unlock Door
-            </Button>
-          </NumPad.Number>
+          {props.completed === true ? (
+            <NumPad.Number
+              placeholder="Enter code to unlock door"
+              negative={false}
+              decimal={false}
+              onChange={value => {
+                verifyFinal(value.toString());
+              }}
+            >
+              <Button variant="dark" size="md" block>
+                Unlock Door
+              </Button>
+            </NumPad.Number>
+          ) : null}
         </Col>
       </Row>
     </Container>

@@ -16,11 +16,13 @@ export default function SubmissionModal(props) {
 
   return (
     <>
-      <div style={{ marginBottom: "10 rem" }}>
-        <Button variant="success" onClick={handleShow} size="lg" block>
-          Enter Secret
-        </Button>
-      </div>
+      {props.completed === false ? (
+        <div style={{ marginBottom: "10 rem" }}>
+          <Button variant="success" onClick={handleShow} size="lg" block>
+            Enter Number
+          </Button>
+        </div>
+      ) : null}
 
       <Modal
         show={show}
