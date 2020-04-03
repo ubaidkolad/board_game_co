@@ -8,13 +8,11 @@ export default class Timer extends React.Component {
   }
 
   componentDidUpdate(previousProps, previousState) {
-    if (previousProps.penalty !== this.props.penalty) {
-      if (this.props.penalty !== 0) {
-        this.setState({
-          secondElapsed: this.state.secondElapsed + this.props.penalty
-        });
-        this.props.setPenalty(0);
-      }
+    if (this.props.penalty !== 0) {
+      this.setState({
+        secondElapsed: this.state.secondElapsed + this.props.penalty
+      });
+      this.props.setPenalty(0);
     }
   }
 
