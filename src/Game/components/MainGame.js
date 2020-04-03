@@ -22,7 +22,9 @@ export default function MainGame() {
 	const [completed, setCompleted] = useState(false);
 
 	function verifyFinal(code) {
-		if (code.toString() === FINAL_ASNWER) {
+		console.log(code);
+		console.log(FINAL_ASNWER.key);
+		if (code.toString() === FINAL_ASNWER.key) {
 			alert("YOU WIN");
 		} else {
 			setPenalty(true);
