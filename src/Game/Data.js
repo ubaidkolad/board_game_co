@@ -117,7 +117,10 @@ export const LEVELS = [
 
 export const START_CARDS = [22, 14, 67, 21, 42, 7, 16];
 
-export const FINAL_ASNWER = "2946";
+export const FINAL_ASNWER = {
+  key: "6429",
+  hint: "The colors should help you arrange the digits in the right order"
+};
 
 export const ROOM_DETAILS = {
   name: "Office",

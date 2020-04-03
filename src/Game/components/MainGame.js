@@ -21,7 +21,7 @@ export default function MainGame() {
   const [completed, setCompleted] = useState(false);
 
   function verifyFinal(code) {
-    if (code.toString() === FINAL_ASNWER) {
+    if (code.toString() === FINAL_ASNWER.key) {
       alert("YOU WIN");
     } else {
       setPenalty(180);
@@ -54,20 +54,26 @@ export default function MainGame() {
         <Col md={2}>
           <Timer penalty={penalty} setPenalty={setPenalty}></Timer>
         </Col>
-        <Col>
-          <h3>Using hints will result in 5 min penalty</h3>
-        </Col>
-        <Col md={3}>
-          <Button
-            onClick={() => {
-              alert(roundAnswers[0].hint);
-              setPenalty(300);
-            }}
-            block
-          >
-            Hint
-          </Button>
-        </Col>
+        <>
+          <Col>
+            <h3>Using hints will result in 5 min penalty</h3>
+          </Col>
+          <Col md={3}>
+            <Button
+              onClick={() => {
+                alert(
+                  roundAnswers[0] !== undefined
+                    ? roundAnswers[0].hint
+                    : FINAL_ASNWER.hint
+                );
+                setPenalty(300);
+              }}
+              block
+            >
+              Hint
+            </Button>
+          </Col>
+        </>
       </Row>
       <RoomCard
         completed={completed}
