@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+//import { Button, Icon } from "semantic-ui-react";
 
 export default function Instructions() {
 	return (
@@ -7,7 +9,7 @@ export default function Instructions() {
 				className="container"
 				style={{
 					width: "40rem",
-					marginTop: "6rem"
+					marginTop: "6rem",
 				}}
 			>
 				<div
@@ -15,7 +17,7 @@ export default function Instructions() {
 					style={{
 						backgroundImage: "linear-gradient(#A9E4EA, #15a2b0)",
 						boxShadow:
-							"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+							"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 					}}
 				>
 					<h2 style={{ fontFamily: "'Merienda One', cursive" }}>
@@ -36,17 +38,9 @@ export default function Instructions() {
 						escape before time runs out.
 					</p>
 				</div>
-				<button
-					className="btn"
-					style={{
-						marginLeft: "15rem",
-						backgroundImage: "linear-gradient(#A9E4EA, #15a2b0)",
-
-						fontFamily: "'Merienda One', cursive"
-					}}
-				>
-					PLAY NOW
-				</button>
+				<Link to="/game">
+					<button className="btn btn-primary">PLAY NOW !</button>
+				</Link>
 			</div>
 		</div>
 	);
