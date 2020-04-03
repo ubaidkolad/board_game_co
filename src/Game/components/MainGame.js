@@ -24,7 +24,7 @@ export default function MainGame() {
     if (code.toString() === FINAL_ASNWER) {
       alert("YOU WIN");
     } else {
-      setPenalty(true);
+      setPenalty(180);
       alert("Wrong Answer 30 sec penalty");
     }
   }
@@ -44,13 +44,13 @@ export default function MainGame() {
       setroundAnswers(roundAnswers);
     } else {
       alert("Wrong Answer 30 sec penalty");
-      setPenalty(true);
+      setPenalty(30);
     }
   }
 
   return (
     <>
-      <Row style={{ paddingTop: "5rem" }}>
+      <Row style={{ paddingTop: "5rem", paddingBottom: "0.3 rem" }}>
         <Col md={2}>
           <Timer penalty={penalty} setPenalty={setPenalty}></Timer>
         </Col>
@@ -58,7 +58,13 @@ export default function MainGame() {
           <h3>Using hints will result in 5 min penalty</h3>
         </Col>
         <Col md={3}>
-          <Button onClick={() => alert(roundAnswers[0].hint)} block>
+          <Button
+            onClick={() => {
+              alert(roundAnswers[0].hint);
+              setPenalty(300);
+            }}
+            block
+          >
             Hint
           </Button>
         </Col>
