@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ObjectCard from "./ObjectCard/ObjectCard";
 import Timer from "./Timer";
 import RoomCard from "./RoomCard/RoomCard";
@@ -18,15 +18,28 @@ export default function MainGame() {
   const [activeCards, setActiveCards] = useState(
     START_CARDS.map(i => ALL_CARDS[i])
   );
-  const [penalty, setPenalty] = useState(false);
   const [roundAnswers, setroundAnswers] = useState(LEVELS);
   const [completed, setCompleted] = useState(false);
+  const [secondElapsed, setSecondElapsed] = useState(1);
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setSecondElapsed(secondElapsed + 1);
+  //   }, 1000);
+  // }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSecondElapsed(secondElapsed + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [secondElapsed]);
 
   function verifyFinal(code) {
     if (code.toString() === FINAL_ASNWER.key) {
       alert("YOU WIN");
     } else {
-      setPenalty(180);
+      setSecondElapsed(secondElapsed + 180);
       alert("Wrong Answer 30 sec penalty");
     }
   }
@@ -46,7 +59,7 @@ export default function MainGame() {
       setroundAnswers(roundAnswers);
     } else {
       alert("Wrong Answer 30 sec penalty");
-      setPenalty(30);
+      setSecondElapsed(secondElapsed + 30);
     }
   }
 
@@ -62,7 +75,7 @@ export default function MainGame() {
           <div style={props} className="post">
             <Row style={{ paddingTop: "3.5rem" }}>
               <Col md={2}>
-                <Timer penalty={penalty} setPenalty={setPenalty}></Timer>
+                <Timer secondElapsed={secondElapsed}></Timer>
               </Col>
               <Col>
                 <h3>Using hints will result in 5 min penalty</h3>
@@ -70,7 +83,7 @@ export default function MainGame() {
               <Col md={3}>
                 <Button
                   onClick={() => {
-                    setPenalty(300);
+                    setSecondElapsed(secondElapsed + 300);
                     alert(roundAnswers[0].hint);
                   }}
                   block
