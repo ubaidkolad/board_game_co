@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+//import { Button, Icon } from "semantic-ui-react";
 
 export default function Instructions() {
 	return (
@@ -38,17 +39,7 @@ export default function Instructions() {
 					</p>
 				</div>
 				<Link to="/game">
-					<button
-						className="btn"
-						style={{
-							marginLeft: "15rem",
-							backgroundImage: "linear-gradient(#A9E4EA, #15a2b0)",
-
-							fontFamily: "'Merienda One', cursive",
-						}}
-					>
-						PLAY NOW
-					</button>
+					<button className="btn btn-primary">PLAY NOW !</button>
 				</Link>
 			</div>
 		</div>

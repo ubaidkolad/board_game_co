@@ -4,6 +4,7 @@ import Navbar from "./NavBar/Navbar";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Instructions from "../src/Game/components/Instructions/Instructions";
+import EndGame from "./Game/components/EndGame/EndGame";
 
 function App() {
 	return (
@@ -11,11 +12,14 @@ function App() {
 			<Navbar></Navbar>
 			<Router>
 				<Switch>
-					<Route exact path="/game">
+					<Route path="/game">
 						<Game />
 					</Route>
 					<Route exact path="/">
 						<Instructions />
+					</Route>
+					<Route path="/endgame">
+						<EndGame />
 					</Route>
 				</Switch>
 			</Router>
