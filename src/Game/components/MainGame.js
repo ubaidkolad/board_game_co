@@ -4,7 +4,9 @@ import Timer from "./Timer";
 import RoomCard from "./RoomCard/RoomCard";
 import SubmissionModal from "./SubmissionModal";
 import { Row, Col, Button } from "react-bootstrap";
-import { Trail } from "react-spring/renderprops";
+import { Trail, Spring, animated } from "react-spring/renderprops";
+import { AnimatedList } from "react-animated-list";
+
 // { Button, Icon } from "semantic-ui-react";
 
 import {
@@ -67,11 +69,18 @@ export default function MainGame() {
 		}
 	}
 
+	function hint() {
+		if (typeof roundAnswers[0] !== "undefined") {
+			alert(roundAnswers[0].hint);
+		} else {
+			alert(FINAL_ASNWER.hint);
+		}
+	}
+
 	return (
 		<>
 			<Trail
 				items={ROOM_DETAILS}
-				keys={(item) => item.name}
 				from={{ transform: "translate3d(-11100px,400px,500px)" }}
 				to={{ transform: "translate3d(0px,20px,500px)" }}
 			>
@@ -88,7 +97,7 @@ export default function MainGame() {
 								<Button
 									onClick={() => {
 										setSecondElapsed(secondElapsed + 300);
-										alert(roundAnswers[0].hint);
+										hint();
 									}}
 									block
 								>
@@ -109,26 +118,21 @@ export default function MainGame() {
 					</div>
 				)}
 			</Trail>
+
 			<Row style={{ paddingTop: "1rem" }}>
 				<Trail
 					items={activeCards}
 					from={{ transform: "translate3d(11100px,400px,500px)" }}
 					to={{ transform: "translate3d(0px,20px,500px)" }}
 				>
-					{(c) => (props) => (
+					{(items) => (props) => (
 						<Col md={3} style={{ paddingBottom: "1rem" }}>
-							<div style={props} className="h-100">
-								<ObjectCard card={c}></ObjectCard>
-							</div>
+							<animated.div style={props} className="h-100">
+								<ObjectCard card={items}></ObjectCard>
+							</animated.div>
 						</Col>
 					)}
 				</Trail>
-
-				{/* {activeCards.map((c) => (
-					<Col md={3} style={{ paddingBottom: "1rem" }}>
-						<ObjectCard card={c}></ObjectCard>
-					</Col>
-				))} */}
 			</Row>
 		</>
 	);
