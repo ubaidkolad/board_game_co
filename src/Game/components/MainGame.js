@@ -4,10 +4,7 @@ import Timer from "./Timer";
 import RoomCard from "./RoomCard/RoomCard";
 import SubmissionModal from "./SubmissionModal";
 import { Row, Col, Button } from "react-bootstrap";
-import { Trail, Spring, animated } from "react-spring/renderprops";
-import { AnimatedList } from "react-animated-list";
-
-// { Button, Icon } from "semantic-ui-react";
+import { Trail, animated } from "react-spring/renderprops";
 
 import {
 	ALL_CARDS,
@@ -17,7 +14,7 @@ import {
 	ROOM_DETAILS,
 } from "../Data";
 
-export default function MainGame() {
+export default function MainGame(props) {
 	const [activeCards, setActiveCards] = useState(
 		START_CARDS.map((i) => ALL_CARDS[i])
 	);
