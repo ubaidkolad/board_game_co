@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import { Button, Icon } from "semantic-ui-react";
-
+import { Button } from "react-bootstrap";
 export default function Instructions() {
 	return (
 		<div>
@@ -39,7 +38,7 @@ export default function Instructions() {
 					</p>
 				</div>
 				<Link to="/game">
-					<button className="btn btn-primary">PLAY NOW !</button>
+					<Button variant="info">PLAY NOW</Button>
 				</Link>
 			</div>
 		</div>
