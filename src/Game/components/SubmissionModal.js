@@ -33,7 +33,7 @@ export default function SubmissionModal(props) {
 				style={{ textAlign: "center" }}
 			>
 				<Modal.Header closeButton>
-					<Modal.Title style={{ fontFamily: "'Merienda One', cursive" }}>
+					<Modal.Title style={{ fontFamily: "'Didact Gothic', sans-serif" }}>
 						Check Deck
 					</Modal.Title>
 				</Modal.Header>
