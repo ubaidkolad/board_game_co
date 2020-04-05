@@ -44,7 +44,7 @@ export default function MainGame(props) {
 
   function verifyCards(number) {
     if (number.toString() === roundAnswers[0].key) {
-      alert(roundAnswers[0].msg);
+      alert(roundAnswers[0].mgs);
       setActiveCards(
         [
           ...activeCards,
