@@ -37,7 +37,7 @@ function MainGame(props) {
 
   function verifyFinal(code) {
     if (code.toString() === FINAL_ASNWER.key) {
-      alert("YOU WIN");
+      alert(FINAL_ASNWER.msg);
       setEndTime(true);
     } else {
       setSecondElapsed(secondElapsed + 180);
@@ -163,22 +163,7 @@ function MainGame(props) {
             )}
           </Trail>
         </Row>
-        );
-        <Row style={{ paddingTop: "1rem" }}>
-          <Trail
-            items={activeCards}
-            from={{ transform: "translate3d(11100px,400px,500px)" }}
-            to={{ transform: "translate3d(0px,20px,500px)" }}
-          >
-            {(items) => (props) => (
-              <Col md={3} style={{ paddingBottom: "3rem" }}>
-                <animated.div style={props} className="h-100">
-                  <ObjectCard card={items}></ObjectCard>
-                </animated.div>
-              </Col>
-            )}
-          </Trail>
-        </Row>
+
         {endTime ? (
           <Redirect
             to={{
