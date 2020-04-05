@@ -4,6 +4,7 @@ import Nav from "./NavBar/Nav";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import InstructionPage from "./Game/components/Instructions/InstrucionPage";
+import EndGame from "./Game/components/EndGame/EndGame";
 
 function App() {
 	return (
@@ -23,6 +24,9 @@ function App() {
 					</Route>
 					<Route path="/game">
 						<Game />
+					</Route>
+					<Route path="/endgame">
+						<EndGame />
 					</Route>
 				</Switch>
 			</Router>

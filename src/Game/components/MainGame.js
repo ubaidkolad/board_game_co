@@ -167,7 +167,6 @@ function MainGame(props) {
 				<Row style={{ paddingTop: "1rem" }}>
 					<Trail
 						items={activeCards}
-						keys={(item) => item.number}
 						from={{ transform: "translate3d(11100px,400px,500px)" }}
 						to={{ transform: "translate3d(0px,20px,500px)" }}
 					>
