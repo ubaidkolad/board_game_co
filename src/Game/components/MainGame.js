@@ -6,6 +6,7 @@ import SubmissionModal from "./SubmissionModal";
 import { Row, Col, Button, Modal } from "react-bootstrap";
 import { Trail, animated } from "react-spring/renderprops";
 import Instructions from "./Instructions/Instructions";
+import { withRouter, Redirect } from "react-router-dom";
 
 import {
   ALL_CARDS,
@@ -15,7 +16,7 @@ import {
   ROOM_DETAILS,
 } from "../Data";
 
-export default function MainGame(props) {
+function MainGame(props) {
   const [activeCards, setActiveCards] = useState(
     START_CARDS.map((i) => ALL_CARDS[i])
   );
@@ -23,6 +24,7 @@ export default function MainGame(props) {
   const [roundAnswers, setroundAnswers] = useState(LEVELS);
   const [completed, setCompleted] = useState(false);
   const [secondElapsed, setSecondElapsed] = useState(1);
+  const [endTime, setEndTime] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -36,6 +38,7 @@ export default function MainGame(props) {
   function verifyFinal(code) {
     if (code.toString() === FINAL_ASNWER.key) {
       alert("YOU WIN");
+      setEndTime(true);
     } else {
       setSecondElapsed(secondElapsed + 180);
       alert("Wrong Answer 30 sec penalty");
@@ -44,7 +47,7 @@ export default function MainGame(props) {
 
   function verifyCards(number) {
     if (number.toString() === roundAnswers[0].key) {
-      alert(roundAnswers[0].mgs);
+      alert(roundAnswers[0].msg);
       setActiveCards(
         [
           ...activeCards,
@@ -138,7 +141,6 @@ export default function MainGame(props) {
                 details={ROOM_DETAILS}
                 verifyFinal={verifyFinal}
               ></RoomCard>
-
               <SubmissionModal
                 completed={completed}
                 verifyCards={verifyCards}
@@ -146,11 +148,9 @@ export default function MainGame(props) {
             </div>
           )}
         </Trail>
-
         <Row style={{ paddingTop: "1rem" }}>
           <Trail
             items={activeCards}
-            keys={(item) => item.number}
             from={{ transform: "translate3d(11100px,400px,500px)" }}
             to={{ transform: "translate3d(0px,20px,500px)" }}
           >
@@ -163,7 +163,37 @@ export default function MainGame(props) {
             )}
           </Trail>
         </Row>
+        );
+        <Row style={{ paddingTop: "1rem" }}>
+          <Trail
+            items={activeCards}
+            from={{ transform: "translate3d(11100px,400px,500px)" }}
+            to={{ transform: "translate3d(0px,20px,500px)" }}
+          >
+            {(items) => (props) => (
+              <Col md={3} style={{ paddingBottom: "3rem" }}>
+                <animated.div style={props} className="h-100">
+                  <ObjectCard card={items}></ObjectCard>
+                </animated.div>
+              </Col>
+            )}
+          </Trail>
+        </Row>
+        {endTime ? (
+          <Redirect
+            to={{
+              pathname: "/endgame",
+              state: {
+                s: secondElapsed,
+              },
+            }}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
 }
+
+export default withRouter(MainGame);
