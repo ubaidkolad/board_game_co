@@ -7,13 +7,13 @@ export default function Instructions() {
 		<>
 			<div
 				className="container"
-				style={{ height: "100%", backgroundColor: "#000B16" }}
+				style={{ height: "100%", textAlign: "center" }}
 			>
 				<div
 					className="div2"
 					style={{
 						boxShadow:
-							"0 4px 8px 0rgba(0,165, 240, 238), 0 6px 20px 0 rgba(0,0, 139, 143)",
+							"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 						marginBottom: "3rem",
 					}}
 				>
@@ -27,7 +27,7 @@ export default function Instructions() {
 					className="div2"
 					style={{
 						boxShadow:
-							"0 4px 8px 0rgba(0,165, 240, 238), 0 6px 20px 0 rgba(0,0, 139, 143)",
+							"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 						marginBottom: "3rem",
 					}}
 				>
@@ -35,13 +35,17 @@ export default function Instructions() {
 						className="img-fluid"
 						alt="rules"
 						src={`${window.location.origin}/assets/images/overview.png`}
+						style={{
+							boxShadow:
+								"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+						}}
 					/>
 				</div>
 				<div
 					className="div2"
 					style={{
 						boxShadow:
-							"0 4px 8px 0rgba(0,165, 240, 238), 0 6px 20px 0 rgba(0,0, 139, 143)",
+							"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 						marginBottom: "3rem",
 					}}
 				>
@@ -56,7 +60,6 @@ export default function Instructions() {
 					style={{
 						boxShadow:
 							"0 4px 8px 0rgba(0,165, 240, 238), 0 6px 20px 0 rgba(0,0, 139, 143)",
-						marginBottom: "3rem",
 					}}
 				>
 					<img
@@ -65,10 +68,12 @@ export default function Instructions() {
 						src={`${window.location.origin}/assets/images/rules.png`}
 					/>
 				</div>
+				<Link to="/game">
+					<Button size="lg" variant="info">
+						BEGIN
+					</Button>
+				</Link>
 			</div>
-			<Link to="/game">
-				<Button variant="info">PLAY NOW</Button>
-			</Link>
 		</>
 	);
 }

@@ -5,7 +5,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Instructions from "../src/Game/components/Instructions/Instructions";
 import EndGame from "./Game/components/EndGame/EndGame";
-import Upload from "./Game/components/Upload";
+//import Upload from "./Game/components/Upload";
 import Login from "./Game/components/Login/Login";
 
 function App() {
@@ -17,11 +17,14 @@ function App() {
 					<Route exact path="/">
 						<Login />
 					</Route>
-					<Route path="/welcome">
+					<Route path="/instructions">
 						<Instructions />
 					</Route>
 					<Route path="/game">
 						<Game />
+					</Route>
+					<Route path="/endgame">
+						<EndGame />
 					</Route>
 				</Switch>
 			</Router>

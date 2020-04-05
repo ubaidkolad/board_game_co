@@ -5,6 +5,7 @@ import RoomCard from "./RoomCard/RoomCard";
 import SubmissionModal from "./SubmissionModal";
 import { Row, Col, Button } from "react-bootstrap";
 import { Trail, animated } from "react-spring/renderprops";
+import { withRouter, Redirect } from "react-router-dom";
 
 import {
 	ALL_CARDS,
@@ -14,13 +15,14 @@ import {
 	ROOM_DETAILS,
 } from "../Data";
 
-export default function MainGame(props) {
+function MainGame(props) {
 	const [activeCards, setActiveCards] = useState(
 		START_CARDS.map((i) => ALL_CARDS[i])
 	);
 	const [roundAnswers, setroundAnswers] = useState(LEVELS);
 	const [completed, setCompleted] = useState(false);
 	const [secondElapsed, setSecondElapsed] = useState(1);
+	const [endTime, setEndTime] = useState(false);
 
 	// useEffect(() => {
 	//   setInterval(() => {
@@ -38,6 +40,8 @@ export default function MainGame(props) {
 	function verifyFinal(code) {
 		if (code.toString() === FINAL_ASNWER.key) {
 			alert("YOU WIN");
+			setEndTime(true);
+			console.log(secondElapsed);
 		} else {
 			setSecondElapsed(secondElapsed + 180);
 			alert("Wrong Answer 30 sec penalty");
@@ -121,7 +125,6 @@ export default function MainGame(props) {
 			<Row style={{ paddingTop: "1rem" }}>
 				<Trail
 					items={activeCards}
-					keys={(item) => item.number}
 					from={{ transform: "translate3d(11100px,400px,500px)" }}
 					to={{ transform: "translate3d(0px,20px,500px)" }}
 				>
@@ -134,6 +137,20 @@ export default function MainGame(props) {
 					)}
 				</Trail>
 			</Row>
+			{endTime ? (
+				<Redirect
+					to={{
+						pathname: "/endgame",
+						state: {
+							s: secondElapsed,
+						},
+					}}
+				/>
+			) : (
+				<></>
+			)}
 		</>
 	);
 }
+
+export default withRouter(MainGame);
