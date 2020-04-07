@@ -3,38 +3,38 @@ import "./Login.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
+import { url } from "../url";
 
-export default function Login() {
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+export default function Login(props) {
 	const [verification, setVerification] = useState(false);
-	const url = "";
+	const [email, setEmail] = useState();
 
 	function onChangeEmail(e) {
 		setEmail(e.target.value);
 	}
 
-	function onChangePassword(e) {
-		setPassword(e.target.value);
-	}
-
-	function authentication() {
+	function authentication(e) {
+		e.preventDefault();
+		let u = window.location.pathname;
+		console.log(u);
 		let formData = new FormData();
-		Cookies.set("email", email);
-		// formData.append("email", email);
-		// formData.append("password", password);
 
-		// axios.post(url, formData).then((response) => handleResponse(response));
+		formData.append("email", email);
+
+		axios
+			.post(`${url}/user/verify/11-11-1586284076`, formData)
+			.then((response) => handleResponse(response))
+			.catch((err) => alert(err));
 	}
 
-	// function handleResponse(response) {
-	// 	if (response.code === 200) {
-	// 		console.log("Verified");
-	// 		setVerification(true);
-	// 	} else {
-	// 		alert("You are not verified");
-	// 	}
-	// }
+	function handleResponse(response) {
+		console.log(response.status);
+		if (response.status === 200) {
+			setVerification(true);
+			Cookies.set("email", email);
+			Cookies.set("verified", "true");
+		}
+	}
 
 	return (
 		<>
@@ -62,18 +62,6 @@ export default function Login() {
 									onChange={onChangeEmail}
 								/>
 							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">Password</label>
-								<input
-									type="password"
-									name="password"
-									id="password"
-									class="form-control"
-									aria-describedby="emailHelp"
-									placeholder="Enter Password"
-									onChangePassword={onChangePassword}
-								/>
-							</div>
 
 							<div class="col-md-12 text-center ">
 								<button
@@ -87,8 +75,8 @@ export default function Login() {
 						</form>
 					</div>
 				</div>
+				{verification ? <Redirect to="/instructions" /> : <> </>}
 			</div>
-			{verification ? <Redirect to="/instructions" /> : <></>}
 		</>
 	);
 }
