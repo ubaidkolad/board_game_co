@@ -4,9 +4,11 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
 import { url } from "../url";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Login(props) {
 	const [verification, setVerification] = useState(false);
+	const [resp, setResp] = useState();
 	const [email, setEmail] = useState();
 
 	function onChangeEmail(e) {
@@ -15,6 +17,8 @@ export default function Login(props) {
 
 	function authentication(e) {
 		e.preventDefault();
+
+		setResp(true);
 		let u = window.location.pathname;
 		console.log(u);
 		let formData = new FormData();
@@ -31,6 +35,7 @@ export default function Login(props) {
 		console.log(response.status);
 		if (response.status === 200) {
 			setVerification(true);
+			setResp(false);
 			Cookies.set("email", email);
 			Cookies.set("verified", "true");
 		}
@@ -75,8 +80,17 @@ export default function Login(props) {
 						</form>
 					</div>
 				</div>
-				{verification ? <Redirect to="/instructions" /> : <> </>}
+				{resp ? (
+					<h7>
+						<Spinner animation="border" variant="primary" />
+						<br />
+						Verifying, Please wait...
+					</h7>
+				) : (
+					<></>
+				)}
 			</div>
+			{verification ? <Redirect to="/instructions" /> : <> </>}
 		</>
 	);
 }
