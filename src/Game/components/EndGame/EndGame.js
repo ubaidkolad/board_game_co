@@ -12,7 +12,7 @@ function EndGame(props) {
 	useEffect(() => {
 		console.log(Cookies.get("id"));
 		let formData = new FormData();
-		formData.append("email", Cookies.get("email"));
+		formData.append("email", email);
 		formData.append("score", props.location.state.s);
 
 		axios
