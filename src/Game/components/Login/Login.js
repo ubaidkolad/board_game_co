@@ -3,38 +3,68 @@ import "./Login.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
+import { url } from "../url";
+import Spinner from "react-bootstrap/Spinner";
+import { withRouter } from "react-router-dom";
 
-export default function Login() {
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+function Login(props) {
+	Cookies.remove("email");
+	Cookies.remove("verified");
+	//console.log(props.location.state.error);
 	const [verification, setVerification] = useState(false);
-	const url = "";
+	const [resp, setResp] = useState();
+	const [email, setEmail] = useState();
 
 	function onChangeEmail(e) {
 		setEmail(e.target.value);
 	}
 
-	function onChangePassword(e) {
-		setPassword(e.target.value);
+	function validateEmail(e) {
+		e.preventDefault();
+		var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+		if (reg.test(email) == false) {
+			alert("Invalid Email Address");
+			return false;
+		}
+
+		return true;
 	}
 
-	function authentication() {
-		let formData = new FormData();
-		Cookies.set("email", email);
-		// formData.append("email", email);
-		// formData.append("password", password);
+	function authentication(e) {
+		console.log(email);
+		if (email === undefined) {
+			e.preventDefault();
+			alert("Please enter your email address");
+		} else {
+			e.preventDefault();
+			setResp(true);
+			let formData = new FormData();
+			formData.append("email", email);
 
-		// axios.post(url, formData).then((response) => handleResponse(response));
+			axios
+				.post(`${url}/user/verify/test-test-1586344743`, formData)
+				.then((response) => handleResponse(response))
+				.catch((err) => {
+					setResp(false);
+					alert(err);
+				});
+		}
 	}
 
-	// function handleResponse(response) {
-	// 	if (response.code === 200) {
-	// 		console.log("Verified");
-	// 		setVerification(true);
-	// 	} else {
-	// 		alert("You are not verified");
-	// 	}
-	// }
+	function handleResponse(response) {
+		if (response.status === 200) {
+			setResp(false);
+
+			setVerification(true);
+
+			Cookies.set("email", email);
+			Cookies.set("verified", "true");
+			//	alert(response.data.msg);
+		} else {
+			alert("not authorized");
+		}
+	}
 
 	return (
 		<>
@@ -49,7 +79,7 @@ export default function Login() {
 								<h1>Login</h1>
 							</div>
 						</div>
-						<form action="" method="post" name="login">
+						<form>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email address</label>
 								<input
@@ -59,36 +89,46 @@ export default function Login() {
 									id="email"
 									aria-describedby="emailHelp"
 									placeholder="Enter email"
+									onBlur={validateEmail}
 									onChange={onChangeEmail}
+									required
 								/>
 							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">Password</label>
-								<input
-									type="password"
-									name="password"
-									id="password"
-									class="form-control"
-									aria-describedby="emailHelp"
-									placeholder="Enter Password"
-									onChangePassword={onChangePassword}
-								/>
-							</div>
+							{props.location.state === undefined ? (
+								<> </>
+							) : (
+								<>
+									{" "}
+									<p style={{ color: "red", marginLeft: "5rem" }}>
+										{props.location.state.error}
+									</p>{" "}
+								</>
+							)}
 
 							<div class="col-md-12 text-center ">
-								<button
+								<input
 									type="submit"
+									value="Login"
 									class=" btn btn-block mybtn btn-primary tx-tfm"
 									onClick={authentication}
-								>
-									Login
-								</button>
+								/>
 							</div>
 						</form>
 					</div>
 				</div>
+				{resp ? (
+					<h7>
+						<Spinner animation="border" variant="primary" />
+						<br />
+						Verifying, Please wait...
+					</h7>
+				) : (
+					<></>
+				)}
 			</div>
-			{verification ? <Redirect to="/instructions" /> : <></>}
+			{verification ? <Redirect to="/instructions" /> : <> </>}
 		</>
 	);
 }
+
+export default withRouter(Login);
