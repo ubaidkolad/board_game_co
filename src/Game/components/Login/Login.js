@@ -5,8 +5,12 @@ import { Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
 import { url } from "../url";
 import Spinner from "react-bootstrap/Spinner";
+import { withRouter } from "react-router-dom";
 
-export default function Login(props) {
+function Login(props) {
+	Cookies.remove("email");
+	Cookies.remove("verified");
+	//console.log(props.location.state.error);
 	const [verification, setVerification] = useState(false);
 	const [resp, setResp] = useState();
 	const [email, setEmail] = useState();
@@ -19,8 +23,7 @@ export default function Login(props) {
 		e.preventDefault();
 
 		setResp(true);
-		let u = window.location.pathname;
-		console.log(u);
+
 		let formData = new FormData();
 
 		formData.append("email", email);
@@ -32,12 +35,14 @@ export default function Login(props) {
 	}
 
 	function handleResponse(response) {
-		console.log(response.status);
 		if (response.status === 200) {
+			alert(response.data.msg);
 			setVerification(true);
 			setResp(false);
 			Cookies.set("email", email);
 			Cookies.set("verified", "true");
+		} else {
+			alert("not authorized");
 		}
 	}
 
@@ -67,6 +72,16 @@ export default function Login(props) {
 									onChange={onChangeEmail}
 								/>
 							</div>
+							{props.location.state === undefined ? (
+								<> </>
+							) : (
+								<>
+									{" "}
+									<p style={{ color: "red" }}>
+										{props.location.state.error}
+									</p>{" "}
+								</>
+							)}
 
 							<div class="col-md-12 text-center ">
 								<button
@@ -94,3 +109,5 @@ export default function Login(props) {
 		</>
 	);
 }
+
+export default withRouter(Login);

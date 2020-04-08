@@ -7,10 +7,11 @@ import EndGame from "./Game/components/EndGame/EndGame";
 import Login from "./Game/components/Login/Login";
 import InstructionsPage from "./Game/components/Instructions/InstructionsPage";
 import VerifyRoom from "./Game/components/VerifyRoom";
-import { ProtectedRoute } from "./Game/components/ProtectedRoute";
+import ProtectedRoute from "./Game/components/ProtectedRoute";
 import { setGlobal } from "reactn";
 
 function App() {
+	let u = window.location.pathname;
 	return (
 		<div
 			className="App"
@@ -26,14 +27,11 @@ function App() {
 					<Route exact path="/">
 						<Login />
 					</Route>
-
 					<Route path="/instructions">
 						<InstructionsPage />
 					</Route>
 					<ProtectedRoute path="/game" component={Game} />
-					<Route path="/login">
-						<Login />
-					</Route>
+
 					<ProtectedRoute path="/endgame" component={EndGame} />
 					<Route path="*" component={() => "404 not found"} />
 				</Switch>

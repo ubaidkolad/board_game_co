@@ -1,10 +1,9 @@
 import React from "react";
-import login from "./Login/Login";
 import { Redirect, Route } from "react-router-dom";
-import Game from "../Game";
 import Cookies from "js-cookie";
+import { withRouter } from "react-router-dom";
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => (
+const ProtectedRoute = ({ component: Component, ...rest }) => (
 	<Route
 		{...rest}
 		render={(props) => {
@@ -18,7 +17,6 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => (
 						<Redirect
 							to={{
 								pathname: "/",
-
 								state: {
 									error: "You need to Login to Play",
 								},
@@ -30,3 +28,4 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => (
 		}}
 	/>
 );
+export default withRouter(ProtectedRoute);
