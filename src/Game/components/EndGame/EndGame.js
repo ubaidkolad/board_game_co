@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { url } from "../url";
+
 function EndGame(props) {
+	useEffect(() => {
+		let formData = new FormData();
+		formData.append("email", Cookies.get("email"));
+		formData.append("time", props.location.state.s);
+
+		axios.post(`${url}/user/score/gameroom`);
+	});
+
 	let email = Cookies.get("email");
 	Cookies.remove("email");
 	Cookies.remove("verified");

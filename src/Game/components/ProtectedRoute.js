@@ -18,7 +18,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
 							to={{
 								pathname: "/",
 								state: {
-									error: "You need to Login to Play",
+									error: "Please LOGIN to Play!",
 								},
 							}}
 						/>

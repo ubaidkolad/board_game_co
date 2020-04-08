@@ -11,7 +11,10 @@ import ProtectedRoute from "./Game/components/ProtectedRoute";
 import { setGlobal } from "reactn";
 
 function App() {
-	let u = window.location.pathname;
+	const see = (routerProps) => {
+		console.log(routerProps);
+		console.log("ok");
+	};
 	return (
 		<div
 			className="App"
@@ -24,9 +27,8 @@ function App() {
 			<Nav />
 			<Router>
 				<Switch>
-					<Route exact path="/">
-						<Login />
-					</Route>
+					<Route exact path="/" component={Login} />
+
 					<Route path="/instructions">
 						<InstructionsPage />
 					</Route>

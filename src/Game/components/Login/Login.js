@@ -19,28 +19,48 @@ function Login(props) {
 		setEmail(e.target.value);
 	}
 
-	function authentication(e) {
+	function validateEmail(e) {
 		e.preventDefault();
+		var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-		setResp(true);
+		if (reg.test(email) == false) {
+			alert("Invalid Email Address");
+			return false;
+		}
 
-		let formData = new FormData();
+		return true;
+	}
 
-		formData.append("email", email);
+	function authentication(e) {
+		console.log(email);
+		if (email === undefined) {
+			e.preventDefault();
+			alert("Please enter your email address");
+		} else {
+			e.preventDefault();
+			setResp(true);
+			let formData = new FormData();
+			formData.append("email", email);
 
-		axios
-			.post(`${url}/user/verify/11-11-1586284076`, formData)
-			.then((response) => handleResponse(response))
-			.catch((err) => alert(err));
+			axios
+				.post(`${url}/user/verify/test-test-1586344743`, formData)
+				.then((response) => handleResponse(response))
+				.catch((err) => {
+					setResp(false);
+					alert(err);
+				});
+		}
 	}
 
 	function handleResponse(response) {
 		if (response.status === 200) {
-			alert(response.data.msg);
-			setVerification(true);
 			setResp(false);
+
+			setVerification(true);
+
 			Cookies.set("email", email);
 			Cookies.set("verified", "true");
+			//	alert(response.data.msg);
 		} else {
 			alert("not authorized");
 		}
@@ -59,7 +79,7 @@ function Login(props) {
 								<h1>Login</h1>
 							</div>
 						</div>
-						<form action="" method="post" name="login">
+						<form>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email address</label>
 								<input
@@ -69,7 +89,9 @@ function Login(props) {
 									id="email"
 									aria-describedby="emailHelp"
 									placeholder="Enter email"
+									onBlur={validateEmail}
 									onChange={onChangeEmail}
+									required
 								/>
 							</div>
 							{props.location.state === undefined ? (
@@ -77,20 +99,19 @@ function Login(props) {
 							) : (
 								<>
 									{" "}
-									<p style={{ color: "red" }}>
+									<p style={{ color: "red", marginLeft: "5rem" }}>
 										{props.location.state.error}
 									</p>{" "}
 								</>
 							)}
 
 							<div class="col-md-12 text-center ">
-								<button
+								<input
 									type="submit"
+									value="Login"
 									class=" btn btn-block mybtn btn-primary tx-tfm"
 									onClick={authentication}
-								>
-									Login
-								</button>
+								/>
 							</div>
 						</form>
 					</div>
