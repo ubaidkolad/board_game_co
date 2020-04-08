@@ -19,11 +19,9 @@ function EndGame(props) {
 			.post(`${url}/user/score/${id}`, formData)
 			.then((resp) => console.log(resp))
 			.catch((err) => alert(err));
-	});
+	}, []);
 
 	let email = Cookies.get("email");
-	//Cookies.remove("email");
-	//Cookies.remove("verified");
 
 	function getMinutes(s) {
 		return Math.floor(s / 60);
@@ -31,10 +29,6 @@ function EndGame(props) {
 
 	function getSeconds(s) {
 		return ("0" + (s % 60)).slice(-2);
-	}
-
-	function send() {
-		// to send time and email
 	}
 
 	function clear() {
