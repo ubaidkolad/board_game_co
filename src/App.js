@@ -8,7 +8,6 @@ import Login from "./Game/components/Login/Login";
 import InstructionsPage from "./Game/components/Instructions/InstructionsPage";
 import VerifyRoom from "./Game/components/VerifyRoom";
 import ProtectedRoute from "./Game/components/ProtectedRoute";
-import { setGlobal } from "reactn";
 
 function App() {
 	return (

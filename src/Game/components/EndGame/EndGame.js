@@ -8,18 +8,22 @@ import { url } from "../url";
 function EndGame(props) {
 	const [id, setId] = useState(useRouteMatch("/gameroom/:id").params.id);
 	console.log(useRouteMatch("/gameroom/:id").params.id);
+
 	useEffect(() => {
 		console.log(Cookies.get("id"));
 		let formData = new FormData();
 		formData.append("email", Cookies.get("email"));
-		formData.append("time", props.location.state.s);
+		formData.append("score", props.location.state.s);
 
-		axios.post(`${url}/user/score/${id}`);
+		axios
+			.post(`${url}/user/score/${id}`, formData)
+			.then((resp) => console.log(resp))
+			.catch((err) => alert(err));
 	});
 
 	let email = Cookies.get("email");
-	Cookies.remove("email");
-	Cookies.remove("verified");
+	//Cookies.remove("email");
+	//Cookies.remove("verified");
 
 	function getMinutes(s) {
 		return Math.floor(s / 60);
