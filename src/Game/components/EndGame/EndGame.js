@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
-import { withRouter } from "react-router";
+import React, { useEffect, useState } from "react";
+import { withRouter, useRouteMatch } from "react-router";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { url } from "../url";
 
 function EndGame(props) {
+	const [id, setId] = useState(useRouteMatch("/gameroom/:id").params.id);
+	console.log(useRouteMatch("/gameroom/:id").params.id);
 	useEffect(() => {
+		console.log(Cookies.get("id"));
 		let formData = new FormData();
 		formData.append("email", Cookies.get("email"));
 		formData.append("time", props.location.state.s);
 
-		axios.post(`${url}/user/score/gameroom`);
+		axios.post(`${url}/user/score/${id}`);
 	});
 
 	let email = Cookies.get("email");
@@ -51,7 +54,7 @@ function EndGame(props) {
 						<h5>Elapsed time not available.</h5>
 					</>
 				)}
-				<Link to="/">
+				<Link to={{ pathname: `/gameroom/${id}` }}>
 					<button onClick={clear} className="btn btn-primary">
 						Go to Home
 					</button>

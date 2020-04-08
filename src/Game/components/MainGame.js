@@ -6,7 +6,7 @@ import SubmissionModal from "./SubmissionModal";
 import { Row, Col, Button, Modal } from "react-bootstrap";
 import { Trail, animated } from "react-spring/renderprops";
 import Instructions from "./Instructions/Instructions";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, useRouteMatch } from "react-router-dom";
 
 import {
 	ALL_CARDS,
@@ -25,6 +25,7 @@ function MainGame(props) {
 	const [completed, setCompleted] = useState(false);
 	const [secondElapsed, setSecondElapsed] = useState(1);
 	const [endTime, setEndTime] = useState(false);
+	const [id, setId] = useState(useRouteMatch("/gameroom/:id").params.id);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
@@ -167,7 +168,7 @@ function MainGame(props) {
 				{endTime ? (
 					<Redirect
 						to={{
-							pathname: "/endgame",
+							pathname: `/gameroom/${id}/endgame`,
 							state: {
 								s: secondElapsed,
 							},

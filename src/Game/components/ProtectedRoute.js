@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import Cookies from "js-cookie";
-import { withRouter } from "react-router-dom";
+import { withRouter, useRouteMatch } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => (
 	<Route
@@ -9,6 +9,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
 		render={(props) => {
 			console.log(Cookies.get("verified"));
 			console.log(Cookies.get("email"));
+
 			return (
 				<>
 					{Cookies.get("verified") === "true" ? (
@@ -16,7 +17,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
 					) : (
 						<Redirect
 							to={{
-								pathname: "/",
+								pathname: `/gameroom/${Cookies.get("id")}`,
 								state: {
 									error: "Please LOGIN to Play!",
 								},
